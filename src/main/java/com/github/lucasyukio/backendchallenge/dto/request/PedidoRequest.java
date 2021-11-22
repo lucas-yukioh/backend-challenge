@@ -1,6 +1,9 @@
 package com.github.lucasyukio.backendchallenge.dto.request;
 
+import com.github.lucasyukio.backendchallenge.model.Pedido;
 import com.github.lucasyukio.backendchallenge.validator.UniqueValue;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.Valid;
@@ -8,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
-@Setter
+@Setter @Getter @NoArgsConstructor
 public class PedidoRequest {
 
     @NotBlank
@@ -19,11 +22,8 @@ public class PedidoRequest {
     @Valid
     private List<ItemRequest> itens;
 
-    public String getPedido() {
-        return pedido;
+    public Pedido toModel() {
+        return new Pedido(pedido);
     }
 
-    public List<ItemRequest> getItens() {
-        return itens;
-    }
 }

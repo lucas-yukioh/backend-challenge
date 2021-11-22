@@ -1,5 +1,6 @@
 package com.github.lucasyukio.backendchallenge.model;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
@@ -11,10 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
+@Getter @NoArgsConstructor
 @Table(name = "pedidos")
 public class Pedido {
 
@@ -33,11 +35,12 @@ public class Pedido {
         this.pedido = pedido;
     }
 
-    public String getPedido() {
-        return pedido;
+    public int getQtdTotal() {
+        return itens.stream().mapToInt(Item::getQtd).sum();
     }
 
-    public List<Item> getItens() {
-        return itens;
+    public BigDecimal getPrecoTotal() {
+        return itens.stream().map(Item::precoTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
 }

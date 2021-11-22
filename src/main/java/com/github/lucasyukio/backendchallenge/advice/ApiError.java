@@ -18,8 +18,4 @@ public class ApiError {
         this.errors = Arrays.asList(error);
     }
 
-    public List<String> getErrors() {
-        return errors;
-    }
-
 }

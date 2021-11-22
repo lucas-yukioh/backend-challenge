@@ -1,7 +1,6 @@
 package com.github.lucasyukio.backendchallenge.service.impl;
 
 import com.github.lucasyukio.backendchallenge.dto.request.ItemRequest;
-import com.github.lucasyukio.backendchallenge.model.Item;
 import com.github.lucasyukio.backendchallenge.model.Pedido;
 import com.github.lucasyukio.backendchallenge.repository.ItemRepository;
 import com.github.lucasyukio.backendchallenge.service.ItemService;
@@ -23,8 +22,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void salvarItens(Pedido pedido, List<ItemRequest> itensRequest) {
         for(ItemRequest itemRequest : itensRequest)
-            itemRepository.save(new Item(itemRequest.getDescricao(), itemRequest.getPrecoUnitario(),
-                    itemRequest.getQtd(), pedido));
+            itemRepository.save(itemRequest.toModel(pedido));
     }
 
 }

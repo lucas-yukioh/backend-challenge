@@ -1,5 +1,6 @@
 package com.github.lucasyukio.backendchallenge.model;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 @Entity
-@NoArgsConstructor
+@Getter @NoArgsConstructor
 @Table(name = "itens")
 public class Item {
 
@@ -45,15 +46,8 @@ public class Item {
         this.pedido = pedido;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public BigDecimal precoTotal() {
+        return precoUnitario.multiply(BigDecimal.valueOf(qtd));
     }
 
-    public BigDecimal getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public int getQtd() {
-        return qtd;
-    }
 }

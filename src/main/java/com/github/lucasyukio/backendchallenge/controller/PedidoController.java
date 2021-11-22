@@ -1,7 +1,9 @@
 package com.github.lucasyukio.backendchallenge.controller;
 
 import com.github.lucasyukio.backendchallenge.dto.request.PedidoRequest;
+import com.github.lucasyukio.backendchallenge.dto.request.StatusRequest;
 import com.github.lucasyukio.backendchallenge.dto.response.PedidoResponse;
+import com.github.lucasyukio.backendchallenge.dto.response.StatusResponse;
 import com.github.lucasyukio.backendchallenge.model.Pedido;
 import com.github.lucasyukio.backendchallenge.service.ItemService;
 import com.github.lucasyukio.backendchallenge.service.PedidoService;
@@ -58,6 +60,13 @@ public class PedidoController {
         pedidoService.excluirPedido(pedido);
 
         return ResponseEntity.ok("Pedido excluído com sucesso!");
+    }
+
+    @PostMapping("/status")
+    public ResponseEntity<StatusResponse> mudarStatus(@RequestBody @Valid StatusRequest statusRequest) {
+        StatusResponse statusResponse = pedidoService.mudarStatus(statusRequest);
+
+        return ResponseEntity.ok(statusResponse);
     }
 
 }
